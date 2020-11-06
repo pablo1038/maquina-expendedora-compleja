@@ -23,7 +23,13 @@ public class MaquinaExpendedoraMejorada {
         estacionOrigen = origen;
         estacionDestino = destino;
     }
-
+    public int vaciarDineroDeLaMaquina() { 
+        int dineroVaciado;
+        dineroVaciado = balanceClienteActual + totalDineroAcumulado;
+        balanceClienteActual = 0;
+        totalDineroAcumulado = 0;
+        return dineroVaciado;
+    }
     /**
      * Devuelve el precio del billete
      */
