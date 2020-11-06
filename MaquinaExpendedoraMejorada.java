@@ -24,12 +24,16 @@ public class MaquinaExpendedoraMejorada {
         estacionDestino = destino;
     }
     public int vaciarDineroDeLaMaquina() { 
-        int dineroVaciado;
-        dineroVaciado = balanceClienteActual + totalDineroAcumulado;
-        balanceClienteActual = 0;
-        totalDineroAcumulado = 0;
-        return dineroVaciado;
-    }
+        int valorDinero = totalDineroAcumulado;
+        if ( balanceClienteActual != 0 ) {
+            System.out.println("No se puede realizar la operación, hay un proceso en curso");
+            valorDinero = -1;
+        }
+        else {
+            totalDineroAcumulado = 0; 
+        } 
+        return valorDinero;
+    }    
     /**
      * Devuelve el precio del billete
      */
