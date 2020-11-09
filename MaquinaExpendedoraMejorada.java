@@ -16,6 +16,8 @@ public class MaquinaExpendedoraMejorada {
     private boolean maquinaConPremio;
     // Numero máximo de billetes que la máquina puede vender
     private int numeroMaximoBilletes;
+    //Solo el billete indicado tendrá premio.
+    private int billeteConPremio;
     /**
      * Crea una maquina expendedora de billetes de tren con el 
      * precio del billete y el origen y destino dados. Se asume que el precio
@@ -30,6 +32,7 @@ public class MaquinaExpendedoraMejorada {
         estacionDestino = destino;
         maquinaConPremio = premio;
         numeroMaximoBilletes = numeroMáximoBilletes;
+        billeteConPremio = 0;
 
     }
 
@@ -90,8 +93,9 @@ public class MaquinaExpendedoraMejorada {
     public void imprimirBillete() {
         int cantidadDeDineroQueFalta;
         cantidadDeDineroQueFalta = precioBillete - balanceClienteActual;
-        if (numeroBilletesVendidos >= numeroMaximoBilletes) {
-            System.out.println("No es posible la impresión de más billetes");
+        double descuento = 0.10; 
+            if (numeroBilletesVendidos >= numeroMaximoBilletes) {
+                System.out.println("No es posible la impresión de más billetes");
         }
         else{
             if (cantidadDeDineroQueFalta <= 0) {        
@@ -111,18 +115,22 @@ public class MaquinaExpendedoraMejorada {
                 numeroBilletesVendidos = numeroBilletesVendidos + 1;
             }
             if (maquinaConPremio == true) {
-            double descuento = precioBillete * 0.10;
-            //Se imprime un billete con descuento.
-            System.out.println("Le descontamos " + descuento + "€  por la compra del billete");
+                billeteConPremio = billeteConPremio + 1;
+                if (billeteConPremio == 3) {
+                    descuento = precioBillete * 0.10;
+                    System.out.println("Le descontamos " + descuento + "€  por la compra del billete");
+                    billeteConPremio = 0;
+                    
             
-            
+                }
             }
             else {
                 System.out.println("Necesitas introducir " + cantidadDeDineroQueFalta + " euros mas!");
     
             }            
+        }
     }
-}
+
 
     public void cambiarPrecioBillete() {
         int precioBillete;
